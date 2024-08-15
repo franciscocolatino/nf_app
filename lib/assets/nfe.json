@@ -1,0 +1,272 @@
+{
+    "NFe": {
+      "infNFe": {
+        "ide": {
+          "cUF": 33,
+          "cNF": 5611641,
+          "natOp": "VENDA",
+          "mod": 55,
+          "serie": 4,
+          "nNF": 500778,
+          "dhEmi": "2024-08-12T14:21:59-03:00",
+          "tpNF": 1,
+          "idDest": 2,
+          "cMunFG": 3304557,
+          "tpImp": 1,
+          "tpEmis": 1,
+          "cDV": 4,
+          "tpAmb": 2,
+          "finNFe": 1,
+          "indFinal": 1,
+          "indPres": 9,
+          "indIntermed": 1,
+          "procEmi": 0,
+          "verProc": "MAINO 1.0"
+        },
+        "emit": {
+          "CNPJ": 60124452000107,
+          "xNome": "MAINO SISTEMAS DE INFORMATICA LTD",
+          "xFant": "MAINO SISTEMAS",
+          "enderEmit": {
+            "xLgr": "RUA MARCOS MORO",
+            "nro": 16,
+            "xCpl": "SL 808",
+            "xBairro": "SAO FRANCISCO",
+            "cMun": 3304557,
+            "xMun": "RIO DE JANEIRO",
+            "UF": "RJ",
+            "CEP": 80530080,
+            "cPais": 1058,
+            "xPais": "BRASIL",
+            "fone": 211234567899
+          },
+          "IE": 78205377,
+          "CRT": 3
+        },
+        "dest": {
+          "CNPJ": 8370779000149,
+          "xNome": "MAINO CLIENTE",
+          "enderDest": {
+            "xLgr": "Rua Augusta, 50",
+            "nro": 50,
+            "xBairro": "Consolacao",
+            "cMun": 3550308,
+            "xMun": "SAO PAULO",
+            "UF": "SP",
+            "CEP": 1305901,
+            "cPais": 1058,
+            "xPais": "BRASIL"
+          },
+          "indIEDest": 9
+        },
+        "autXML": {
+          "CNPJ": 60124452000107
+        },
+        "det": [
+          {
+            "prod": {
+              "cProd": "BATATAFRITA",
+              "cEAN": "SEM GTIN",
+              "xProd": "Batata frita",
+              "NCM": 2013000,
+              "CFOP": 6102,
+              "uCom": "BALDE",
+              "qCom": 100,
+              "vUnCom": 25,
+              "vProd": 2500,
+              "cEANTrib": "SEM GTIN",
+              "uTrib": "BALDE",
+              "qTrib": 100,
+              "vUnTrib": 25,
+              "indTot": 1
+            },
+            "imposto": {
+              "vTotTrib": 405,
+              "ICMS": {
+                "ICMS00": {
+                  "orig": 0,
+                  "CST": 0,
+                  "modBC": 3,
+                  "vBC": 2750,
+                  "pICMS": 12,
+                  "vICMS": 330
+                }
+              },
+              "IPI": {
+                "cEnq": 999,
+                "IPITrib": {
+                  "CST": 50,
+                  "vBC": 2500,
+                  "pIPI": 10,
+                  "vIPI": 250
+                }
+              },
+              "II": {
+                "vBC": 0,
+                "vDespAdu": 0,
+                "vII": 0,
+                "vIOF": 0
+              },
+              "PIS": {
+                "PISNT": {
+                  "CST": 7
+                }
+              },
+              "COFINS": {
+                "COFINSNT": {
+                  "CST": 7
+                }
+              },
+              "ICMSUFDest": {
+                "vBCUFDest": 0,
+                "vBCFCPUFDest": 0,
+                "pFCPUFDest": 2,
+                "pICMSUFDest": 5,
+                "pICMSInter": 12,
+                "pICMSInterPart": 100,
+                "vFCPUFDest": 0,
+                "vICMSUFDest": 0,
+                "vICMSUFRemet": 0
+              }
+            }
+          },
+          {
+            "prod": {
+              "cProd": 1046475,
+              "cEAN": "SEM GTIN",
+              "xProd": "BALAO ESTRELA",
+              "NCM": 34013000,
+              "CFOP": 6102,
+              "uCom": "UN",
+              "qCom": 1,
+              "vUnCom": 2.06,
+              "vProd": 2.06,
+              "cEANTrib": "SEM GTIN",
+              "uTrib": "UN",
+              "qTrib": 1,
+              "vUnTrib": 2.06,
+              "indTot": 1
+            },
+            "imposto": {
+              "ICMS": {
+                "ICMS00": {
+                  "orig": 5,
+                  "CST": 0,
+                  "modBC": 3,
+                  "vBC": 2.06,
+                  "pICMS": 12,
+                  "vICMS": 0.25
+                }
+              },
+              "IPI": {
+                "cEnq": 999,
+                "IPINT": {
+                  "CST": 51
+                }
+              },
+              "II": {
+                "vBC": 0,
+                "vDespAdu": 0,
+                "vII": 0,
+                "vIOF": 0
+              },
+              "PIS": {
+                "PISNT": {
+                  "CST": 7
+                }
+              },
+              "COFINS": {
+                "COFINSNT": {
+                  "CST": 7
+                }
+              },
+              "ICMSUFDest": {
+                "vBCUFDest": 0,
+                "vBCFCPUFDest": 0,
+                "pFCPUFDest": 2,
+                "pICMSUFDest": 18,
+                "pICMSInter": 12,
+                "pICMSInterPart": 100,
+                "vFCPUFDest": 0,
+                "vICMSUFDest": 0,
+                "vICMSUFRemet": 0
+              }
+            }
+          }
+        ],
+        "total": {
+          "ICMSTot": {
+            "vBC": 2752.06,
+            "vICMS": 330.25,
+            "vICMSDeson": 0,
+            "vFCP": 0,
+            "vBCST": 0,
+            "vST": 0,
+            "vFCPST": 0,
+            "vFCPSTRet": 0,
+            "vProd": 2502.06,
+            "vFrete": 0,
+            "vSeg": 0,
+            "vDesc": 0,
+            "vII": 0,
+            "vIPI": 250,
+            "vIPIDevol": 0,
+            "vPIS": 0,
+            "vCOFINS": 0,
+            "vOutro": 0,
+            "vNF": 2752.06,
+            "vTotTrib": 405
+          }
+        },
+        "transp": {
+          "modFrete": 1,
+          "vol": {
+            "pesoL": 0,
+            "pesoB": 0
+          }
+        },
+        "pag": {
+          "detPag": {
+            "indPag": 0,
+            "tPag": 90,
+            "vPag": 0
+          }
+        },
+        "infIntermed": {
+          "CNPJ": "",
+          "idCadIntTran": ""
+        },
+        "infAdic": {
+          "infCpl": "; ; Trib aprox: R$ 105,00 Federal R$ 300,00 Estadual Fonte: IBPT"
+        },
+        "infRespTec": {
+          "CNPJ": 8370779000149,
+          "xContato": "Rafael Gioia",
+          "email": "suporte@maino.com.br",
+          "fone": 2122245777
+        }
+      },
+      "Signature": {
+        "SignedInfo": {
+          "CanonicalizationMethod": "",
+          "SignatureMethod": "",
+          "Reference": {
+            "Transforms": {
+              "Transform": [
+                "",
+                ""
+              ]
+            },
+            "DigestMethod": "",
+            "DigestValue": "8bbPuWk7i792kj/TGhprGEd1R28="
+          }
+        },
+        "SignatureValue": "nnuyWQsbHxk35/myA5d5xlcVF9m20NtwRY9YyN8YsSk0dsnEGUvdsBXHIlcTMGfxciyKs2m1rls8FManSV/c4NuFuxOWrh1OjCD8ks7XV5NX6Vk/UbtOWvizsPG1fyGlJ/GZ2tXM9JOCVGeLtBYkqdocB1qZ41/WVcCiKNwhp7AYwaGQNFvA0dDl/ikYS+Gbkns5LX1cgc7+kLiTEU0LK01u2fBmDGX7Tafs+QqSNyXWRC+s/oXdg2XeQ5Z5NYJE708iYI/Q/mx2LNfFvtpRPhZvwbUOXfwpgBgM5R5cz6D6Lr0Dxhv1N7r3rY2zONSrJaSi2ELzJlV4J6zALUXupw==",
+        "KeyInfo": {
+          "X509Data": {
+            "X509Certificate": "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"
+          }
+        }
+      }
+    }
+  }
