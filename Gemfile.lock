@@ -238,6 +238,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  nokogiri (~> 1.6, >= 1.6.8)
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
