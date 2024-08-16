@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   # root "articles#index"
   root to: "users#index"
 
-  get '/login', to: 'login#index'
-  post '/login', to: 'login#login'
-  get 'logout', to: 'login#logout'
+  get '/login', to: 'sessions#index'
+  post '/login', to: 'sessions#login'
+  get 'logout', to: 'sessions#logout'
+  post '/jobs', to: 'jobs#create'
 end
