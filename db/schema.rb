@@ -10,10 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_15_013341) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_16_163241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "cpnj"
+    t.string "name"
+    t.string "trade_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "invoices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "serial_number"
+    t.string "invoice_number"
+    t.string "integer"
+    t.datetime "emission_date"
+    t.uuid "issuing_company_id", null: false
+    t.uuid "recipient_company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issuing_company_id"], name: "index_invoices_on_issuing_company_id"
+    t.index ["recipient_company_id"], name: "index_invoices_on_recipient_company_id"
+  end
+
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.integer "ncm"
+    t.integer "cfop"
+    t.string "unit_c"
+    t.integer "quantity_c"
+    t.float "unit_price"
+    t.float "icms_price"
+    t.float "ipi_price"
+    t.float "pis_price"
+    t.float "cofins_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -23,4 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_15_013341) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "invoices", "companies", column: "issuing_company_id"
+  add_foreign_key "invoices", "companies", column: "recipient_company_id"
 end

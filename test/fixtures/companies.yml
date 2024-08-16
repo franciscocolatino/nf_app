@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cpnj: MyString
+  name: MyString
+  trade_name: MyString
+
+two:
+  cpnj: MyString
+  name: MyString
+  trade_name: MyString
