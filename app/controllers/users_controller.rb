@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate_request, only: %i[ new create ]
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
@@ -25,6 +26,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        token = ::JsonWebToken.encode(user_id: @user.id)
+        cookies.encrypted[:auth_token] = { value: token, expires: 7.days }
         format.html { redirect_to user_url(@user), notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
