@@ -8,7 +8,7 @@ class JobsController < ApplicationController
     service = Jobs::Create.call(params[:parentable_type], @current_user, params[:file_xml])
     @job = service.result
 
-    @job
+    render turbo_stream: turbo_stream.replace("modal", partial: "jobs/modal", locals: { job: @job })
   end
 
   private
