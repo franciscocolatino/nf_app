@@ -11,6 +11,7 @@ WORKDIR $RAILS_ROOT
 COPY Gemfile Gemfile.lock ./
 
 RUN bundle config build.nokogiri --use-system-libraries
+RUN apt-get update && apt-get install -y nodejs
 
 RUN bundle check || bundle install
 

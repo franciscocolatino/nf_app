@@ -12,7 +12,7 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/new
   def new
-    @invoice = Invoice.new
+
   end
 
   # GET /invoices/1/edit

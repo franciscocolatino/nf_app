@@ -6,9 +6,9 @@ class JobsController < ApplicationController
 
   def create
     service = Jobs::Create.call(params[:parentable_type], @current_user, params[:file_xml])
-    @job = service.result
+    job = service.result
 
-    render turbo_stream: turbo_stream.replace("modal", partial: "jobs/modal", locals: { job: @job })
+    render turbo_stream: turbo_stream.replace("job-modal", partial: "jobs/modal_body", locals: { job: job })
   end
 
   private
