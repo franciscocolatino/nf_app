@@ -1,9 +1,15 @@
 <div>
+  <% if @job %>
+    <div style="color: red;">
+      <%= job.id %> Criado com sucesso!
+    </div>
+  <% end %>
+
   <h1>Importar nota fiscal XML</h1>
   <form action="/jobs" method="post" enctype="multipart/form-data">
     <label for="file">Escolha o nota fiscal XML:</label>
     <input type="file" id="file_xml" name="file_xml" accept=".xml" required>
-    <input type="hidden" name="parentable_type" value="ImportNf">
+    <input type="hidden" name="parentable_type" value="ImportNfJob">
     <br><br>
     <button type="submit">Importar</button>
   </form>

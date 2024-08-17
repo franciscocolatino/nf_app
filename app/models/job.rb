@@ -1,6 +1,8 @@
 class Job < ApplicationRecord
+  has_one_attached :file
+
   PARENTABLE_TYPES = {
-    (ImportNf = 'ImportNf' ) => 'Realiza a importação de notas fiscais'
+    (ImportNfJob = 'ImportNfJob' ) => 'Realiza a importação de notas fiscais'
   }.freeze
 
   STATUS_JOB = {

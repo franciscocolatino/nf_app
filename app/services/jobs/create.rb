@@ -1,9 +1,9 @@
 class Jobs::Create
   prepend SimpleCommand
 
-  def initialize(parentable_type, current_user, arguments)
+  def initialize(parentable_type, current_user, file)
     @parentable_type = parentable_type
-    @arguments = arguments.transform_keys(&:to_sym)
+    @file = file
     @current_user = current_user
     @service_job = "#{parentable_type.try(:camelize)}".constantize
   rescue => e
@@ -25,7 +25,8 @@ class Jobs::Create
   def create_job
     @job = Job.create!(
       progress: 10, author_id: @current_user.id,
-      arguments: @arguments, parentable_type: @parentable_type
+      arguments: @arguments, parentable_type: @parentable_type,
+      file: @file
     )
   rescue ActiveRecord::RecordInvalid => e
     error_handling(e.to_s)

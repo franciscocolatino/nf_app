@@ -5,10 +5,8 @@ class JobsController < ApplicationController
   end
 
   def create
-    file = params[:file_xml].tempfile.path
-    job = Jobs::Create.call(params[:parentable_type], current_user, { file_path: file })
-
-    job
+    
+    @job = Jobs::Create.call(params[:parentable_type], @current_user, params[:file_xml])
   end
 
   private
