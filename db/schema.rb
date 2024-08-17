@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_16_224559) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_17_010556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_224559) do
   end
 
   create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "cpnj"
+    t.string "cnpj"
     t.string "name"
     t.string "trade_name"
     t.datetime "created_at", null: false
@@ -89,6 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_224559) do
     t.float "cofins_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "invoice_id"
+    t.index ["invoice_id"], name: "index_products_on_invoice_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -104,4 +106,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_16_224559) do
   add_foreign_key "invoices", "companies", column: "issuing_company_id"
   add_foreign_key "invoices", "companies", column: "recipient_company_id"
   add_foreign_key "jobs", "users", column: "author_id"
+  add_foreign_key "products", "invoices"
 end

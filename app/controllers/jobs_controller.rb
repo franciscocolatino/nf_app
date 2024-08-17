@@ -5,8 +5,10 @@ class JobsController < ApplicationController
   end
 
   def create
-    
-    @job = Jobs::Create.call(params[:parentable_type], @current_user, params[:file_xml])
+    service = Jobs::Create.call(params[:parentable_type], @current_user, params[:file_xml])
+    @job = service.result
+
+    @job
   end
 
   private

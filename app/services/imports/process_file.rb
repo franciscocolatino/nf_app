@@ -32,8 +32,9 @@ class Imports::ProcessFile
     ActiveRecord::Base.transaction do
       company_emit = create_company(emit_infos)
       company_dest = create_company(dest_infos)
-
+      
       invoice = create_invoice(nfe_infos, company_emit, company_dest)
+
       process_products(file, invoice)
 
       invoice
@@ -45,11 +46,11 @@ class Imports::ProcessFile
   def process_products(file, invoice)
     products_file = file.css('det')
 
-    products_file.map do |product_file|
+    products_instances = products_file.map do |product_file|
       instance_product(product_file, invoice.id)
     end
 
-    Product.import(products, batch_size: 1000)
+    Product.import(products_instances, batch_size: 1000)
   rescue => e
     errors.add(:process_products, e.to_s)
     raise ActiveRecord::Rollback
@@ -68,11 +69,11 @@ class Imports::ProcessFile
 
   def create_invoice(invoice_file, company_emit, company_dest)
     Invoice.create!(
-      serie: invoice_file.css('serie').text,
-      number: invoice_file.css('nNF').text,
+      serial_number: invoice_file.css('serie').text,
+      invoice_number: invoice_file.css('nNF').text,
       emission_date: invoice_file.css('dhEmi').text,
-      issuing_company: company_emit.id,
-      recipient_company: company_dest.id
+      issuing_company_id: company_emit.id,
+      recipient_company_id: company_dest.id
     )
   rescue ActiveRecord::RecordInvalid => e
     errors.add(:create_invoice, e.to_s)
@@ -85,7 +86,7 @@ class Imports::ProcessFile
     Product.new(
       invoice_id: invoice_id,
       name: product_file.css('xProd').text,
-      nmc: product_file.css('NCM').text,
+      ncm: product_file.css('NCM').text,
       cfop: product_file.css('CFOP').text,
       unit_c: product_file.css('uCom').text,
       quantity_c: product_file.css('qCom').text,

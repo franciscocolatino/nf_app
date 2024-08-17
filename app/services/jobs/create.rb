@@ -18,6 +18,8 @@ class Jobs::Create
     @service_job.perform_later(
       @job.id, @current_user.id, @arguments
     )
+
+    @job
   rescue => e
     error_handling(e.to_s)
   end
