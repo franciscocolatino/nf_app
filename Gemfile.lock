@@ -54,6 +54,8 @@ GEM
     activerecord (7.0.8.4)
       activemodel (= 7.0.8.4)
       activesupport (= 7.0.8.4)
+    activerecord-import (1.7.0)
+      activerecord (>= 4.2)
     activestorage (7.0.8.4)
       actionpack (= 7.0.8.4)
       activejob (= 7.0.8.4)
@@ -234,6 +236,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-import (~> 1.4, >= 1.4.1)
   bcrypt (~> 3.1.7)
   bootsnap
   capybara
