@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       cookies.encrypted[:auth_token] = { value: service.result[:token], expires: 7.days }
       redirect_to root_path
     else
-      redirect_to login_path, status: :unauthorized, notice: "Usuário ou senha inválidos"
+      render turbo_stream: turbo_stream.replace("error-message", partial: "error", locals: { message: "Usuário ou senha inválidos" })
     end
   end
 

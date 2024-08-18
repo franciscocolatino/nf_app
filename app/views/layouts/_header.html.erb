@@ -1,20 +1,17 @@
 
-<nav class="navbar">
-  <% if @current_user %>
-    <a class="navbar-brand" href="/">Olá, <%= @current_user.name %></a>
-  <% end %>
-    </ul>
-    <ul class="nav justify-content-end">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <% if @current_user %>
+<% if @current_user %>
+  <nav class="navbar">
+      <a class="navbar-brand" href="/">Olá, <%= @current_user.name %></a>
+      <ul class="nav justify-content-end">
         <li class="nav-item">
-          <%= link_to "Logout", logout_path, method: :get, class: "btn btn-danger" %>
+          <a class="nav-link active" aria-current="page" href="/invoices">Notas Fiscais</a>
         </li>
-      <% end %>
-    </ul>
-</nav>
+        <li class="nav-item">
+          <a class="nav-link" href="/users">Usuários</a>
+        </li>
+          <li class="nav-item">
+            <%= link_to "Logout", logout_path, method: :get, class: "btn btn-danger" %>
+          </li>
+      </ul>
+  </nav>
+<% end %>
