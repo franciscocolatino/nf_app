@@ -1,11 +1,11 @@
-<div>
+<div data-controller="invoice-new">
   <h1>Importar nota fiscal XML</h1>
-  <form action="/jobs" method="post" enctype="multipart/form-data", data-controller="import-form">
+  <form action="/jobs" method="post" enctype="multipart/form-data">
     <label for="file">Escolha o nota fiscal XML:</label>
-    <input type="file" id="file_xml" name="file_xml" accept=".xml" data-import-form-target="file" required >
+    <input type="file" id="file_xml" name="file_xml" accept=".xml" data-invoice-new-target="file" required >
     <input type="hidden" name="parentable_type" value="ImportNfJob">
     <br><br>
-    <button type="submit" class="btn btn-primary" id="submitBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-import-form-target="submitButton" disabled>
+    <button type="submit" class="btn btn-primary" id="submitBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-invoice-new-target="submitButton" disabled>
       Importar
     </button>
   </form>
@@ -18,17 +18,14 @@
           <h1 class="modal-title fs-5" id="exampleModalLabel">Processamento em background</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div id="job-modal">
+        <div id="job-modal">
+          <div class="modal-body">
             <div class="d-flex justify-content-center">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary mx-auto">Abrir relatório</button>
         </div>
       </div>
     </div>
