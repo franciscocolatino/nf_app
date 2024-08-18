@@ -1,14 +1,42 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Invoices</h1>
-
-<div id="invoices">
-  <% @invoices.each do |invoice| %>
-    <%= render invoice %>
-    <p>
-      <%= link_to "Show this invoice", invoice %>
-    </p>
+<div class="container-fluid mt-4">
+  
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
   <% end %>
-</div>
 
-<%= link_to "New invoice", new_invoice_path %>
+  <h1>Notas Fiscais</h1>
+  <%= link_to "Importar Nota Fiscal", new_invoice_path, class: "btn btn-primary mt-3" %>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Número de Série</th>
+          <th>Número da Nota Fiscal</th>
+          <th>Data de Emissão</th>
+          <th>Empresa Emitente</th>
+          <th>Empresa Receptora</th>
+          <th>Quantidade de produtos</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @invoices.each do |invoice| %>
+          <tr>
+            <td><%= invoice.serial_number %></td>
+            <td><%= invoice.invoice_number %></td>
+            <td><%= invoice.emission_date %></td>
+            <td><%= invoice.issuing_name %></td>
+            <td><%= invoice.recipient_name %></td>
+            <td><%= invoice.products_quantity %></td>
+            <td>
+              <%= link_to "Mostrar", invoice, class: "btn btn-info btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

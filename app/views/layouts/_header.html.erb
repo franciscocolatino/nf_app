@@ -1,0 +1,20 @@
+
+<nav class="navbar">
+  <% if @current_user %>
+    <a class="navbar-brand" href="/">Olá, <%= @current_user.name %></a>
+  <% end %>
+    </ul>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Active</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <% if @current_user %>
+        <li class="nav-item">
+          <%= link_to "Logout", logout_path, method: :get, class: "btn btn-danger" %>
+        </li>
+      <% end %>
+    </ul>
+</nav>

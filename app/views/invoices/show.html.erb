@@ -1,10 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid mt-4">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
 
-<%= render @invoice %>
+  <div class="card-body">
+    <%= render @invoice %>
+  </div>
 
-<div>
-  <%= link_to "Edit this invoice", edit_invoice_path(@invoice) %> |
-  <%= link_to "Back to invoices", invoices_path %>
-
-  <%= button_to "Destroy this invoice", @invoice, method: :delete %>
+  <div class="d-flex justify-content-between mb-4">
+    <%= link_to "Editar esta nota fiscal", edit_invoice_path(@invoice), class: "btn btn-primary" %>
+    <%= link_to "Voltar para notas fiscais", invoices_path, class: "btn btn-secondary" %>
+    <%= button_to "Excluir esta nota fiscal", @invoice, method: :delete, data: { confirm: 'Tem certeza que deseja excluir esta nota fiscal?' }, class: "btn btn-danger" %>
+  </div>
 </div>

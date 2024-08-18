@@ -1,27 +1,75 @@
-<div id="<%= dom_id invoice %>">
-  <p>
-    <strong>Serial number:</strong>
-    <%= invoice.serial_number %>
-  </p>
+<div id="<%= dom_id invoice %>" class="card mb-4">
+  <div class="card-header">
+    <h5 class="card-title">Detalhes da Nota Fiscal</h5>
+  </div>
+  <div class="card-body">
+    <p class="mb-2">
+      <strong>Número de Série:</strong>
+      <%= invoice.serial_number %>
+    </p>
 
-  <p>
-    <strong>Invoice number:</strong>
-    <%= invoice.invoice_number %>
-  </p>
+    <p class="mb-2">
+      <strong>Número da Nota Fiscal:</strong>
+      <%= invoice.invoice_number %>
+    </p>
 
-  <p>
-    <strong>Emission date:</strong>
-    <%= invoice.emission_date %>
-  </p>
+    <hr>
 
-  <p>
-    <strong>Issuing company:</strong>
-    <%= invoice.issuing_company_id %>
-  </p>
+    <h6>Informações da Empresa Emitente</h6>
+    <p class="mb-2">
+      <strong>Nome:</strong> <%= invoice.issuing_name %>
+    </p>
+    <p class="mb-2">
+      <strong>CNPJ:</strong> <%= invoice.issuing_cnpj %>
+    </p>
 
-  <p>
-    <strong>Recipient company:</strong>
-    <%= invoice.recipient_company_id %>
-  </p>
+    <hr>
 
+    <h6>Informações da Empresa Receptora</h6>
+    <p class="mb-2">
+      <strong>Nome:</strong> <%= invoice.recipient_name %>
+    </p>
+    <p class="mb-2">
+      <strong>CNPJ:</strong> <%= invoice.recipient_cnpj %>
+    </p>
+
+    <hr>
+
+    <h6>Produtos</h6>
+    <div class="list-group">
+      <% invoice.products_details.each do |product| %>
+        <div class="list-group-item">
+          <h6 class="mb-1"><strong>Nome:</strong> <%= product['name'] %></h6>
+          <p class="mb-1">
+            <strong>NCM:</strong> <%= product['ncm'] %> <br>
+            <strong>CFOP:</strong> <%= product['cfop'] %> <br>
+            <strong>Unidade:</strong> <%= product['unit_c'] %> <br>
+            <strong>Quantidade:</strong> <%= product['quantity_c'] %> <br>
+            <strong>Preço Unitário:</strong> R$ <%= product['unit_price'] %> <br>
+            <strong>ICMS:</strong> R$ <%= product['icms_price'] %> <br>
+            <strong>IPI:</strong> R$ <%= product['ipi_price'] %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+
+    <hr>
+
+    <h6>Totalizadores</h6>
+    <p class="mb-2">
+      <strong>Total Quantidade:</strong> <%= number_to_currency(invoice.total_quantity, unit: 'R$') %>
+    </p>
+    <p class="mb-2">
+      <strong>Total Preço Unitário:</strong> <%= number_to_currency(invoice.total_unit_price, unit: 'R$') %>
+    </p>
+    <p class="mb-2">
+      <strong>Total ICMS:</strong> <%= number_to_currency(invoice.total_icms_price, unit: 'R$') %>
+    </p>
+    <p class="mb-2">
+      <strong>Total IPI:</strong> <%= number_to_currency(invoice.total_ipi_price, unit: 'R$') %>
+    </p>
+  </div>
+  <div class="card-footer text-muted">
+    Emitida em: <%= invoice.emission_date %>
+  </div>
 </div>

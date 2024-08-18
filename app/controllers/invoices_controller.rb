@@ -1,13 +1,47 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: %i[ show edit update destroy ]
+  before_action :set_invoice, only: %i[ edit update destroy ]
 
   # GET /invoices or /invoices.json
   def index
-    @invoices = Invoice.all
+    group_columns = Invoice.column_names + ['companies.name', 'companies.cnpj', 'recipient_companies_invoices.name', 'recipient_companies_invoices.cnpj']
+    base = Invoice.joins(:products, :issuing_company, :recipient_company)
+                  .group(group_columns)
+                  .select("invoices.*,
+                            companies.name AS issuing_name,
+                            companies.cnpj AS issuing_cnpj,
+                            recipient_companies_invoices.name AS recipient_name,
+                            recipient_companies_invoices.cnpj AS recipient_cnpj,
+                            COUNT(products.id) AS products_quantity")
+    @invoices = base
   end
 
   # GET /invoices/1 or /invoices/1.json
   def show
+    group_columns = Invoice.column_names + ['companies.name', 'companies.cnpj', 'recipient_companies_invoices.name', 'recipient_companies_invoices.cnpj']
+
+    base = Invoice.joins(:products, :issuing_company, :recipient_company)
+                  .group(group_columns)
+                  .select("invoices.*,
+                            companies.name AS issuing_name,
+                            companies.cnpj AS issuing_cnpj,
+                            recipient_companies_invoices.name AS recipient_name,
+                            recipient_companies_invoices.cnpj AS recipient_cnpj,
+                            COALESCE(SUM(products.quantity_c), 0) AS total_quantity,
+                            COALESCE(SUM(products.unit_price), 0) AS total_unit_price,
+                            COALESCE(SUM(products.icms_price), 0) AS total_icms_price,
+                            COALESCE(SUM(products.ipi_price), 0) AS total_ipi_price,
+                             jsonb_agg(jsonb_build_object(
+                              'name', products.name,
+                              'ncm', products.ncm,
+                              'cfop', products.cfop,
+                              'unit_c', products.unit_c,
+                              'quantity_c', products.quantity_c,
+                              'unit_price', products.unit_price,
+                              'icms_price', products.icms_price,
+                              'ipi_price', products.ipi_price))
+                              AS products_details")
+
+    @invoice = base.find_by(id: params[:id])
   end
 
   # GET /invoices/new
