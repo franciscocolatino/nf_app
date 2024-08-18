@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  before_action :set_job, only: %i[ show ]
 
   def index
     @jobs = Job.all
@@ -11,9 +12,17 @@ class JobsController < ApplicationController
     render turbo_stream: turbo_stream.replace("job-modal", partial: "jobs/modal_body", locals: { job: job })
   end
 
+  def show
+    render json: @job
+  end
+
   private
 
+  def set_job
+    @job = Job.find(params[:id])
+  end
+
   def job_params
-    params.permit(:file_xml, :parentable_type)
+    params.permit(:id, :file_xml, :parentable_type)
   end
 end

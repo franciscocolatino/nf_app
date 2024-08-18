@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#index'
   post '/login', to: 'sessions#login'
   get 'logout', to: 'sessions#logout'
+  get '/jobs/:id', to: 'jobs#show'
   post '/jobs', to: 'jobs#create'
 end

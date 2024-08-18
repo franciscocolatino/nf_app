@@ -1,13 +1,22 @@
-<!-- app/views/jobs/_modal.html.erb -->
-
-<div>
-  <p>Job <%= job.id %></p>
-  <p>Status: <%= job.status %></p>
+<div data-controller="job-polling" data-job-polling-job-id-value="<%= job.id %>">
+  <p>Status: 
+    <span data-job-polling-target="status">
+      <%= job.status %>
+    </span>
+  </p>
+  <p>Erros: 
+    <span data-job-polling-target="errors">
+      <%= job.errors.full_messages.join(', ') %>
+    </span>
+  </p>
+  <p>Progresso: 
+    <span data-job-polling-target="progress">
+      <%= job.progress %>
+    </span>
+  </p>
   <div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar" style="width: 0%"></div>
+    <div class="progress-bar" data-job-polling-target="progressBar" style="width: <%= job.progress %>%"></div>
   </div>
-  <p>Progress: <%= job.progress %></p>
-  <p>Errors: <%= job.errors.full_messages %></p>
 </div>
 
 
