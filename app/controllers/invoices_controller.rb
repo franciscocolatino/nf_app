@@ -4,14 +4,23 @@ class InvoicesController < ApplicationController
   # GET /invoices or /invoices.json
   def index
     group_columns = Invoice.column_names + ['companies.name', 'companies.cnpj', 'recipient_companies_invoices.name', 'recipient_companies_invoices.cnpj']
-    base = Invoice.joins(:products, :issuing_company, :recipient_company)
-                  .group(group_columns)
-                  .select("invoices.*,
-                            companies.name AS issuing_name,
-                            companies.cnpj AS issuing_cnpj,
-                            recipient_companies_invoices.name AS recipient_name,
-                            recipient_companies_invoices.cnpj AS recipient_cnpj,
-                            COUNT(products.id) AS products_quantity")
+
+    subquery = Invoice.joins(:products, :issuing_company, :recipient_company)
+                      .group(group_columns)
+                      .select("invoices.*,
+                                companies.name AS issuing_name,
+                                companies.cnpj AS issuing_cnpj,
+                                recipient_companies_invoices.name AS recipient_name,
+                                recipient_companies_invoices.cnpj AS recipient_cnpj,
+                                COUNT(products.id) AS products_quantity")
+    base = Invoice.unscoped.from(subquery, :invoices)
+
+    base = base.where("lower(trim(invoices.invoice_number::text)) ILIKE lower(trim('%#{params[:search]}%')) OR
+                       lower(trim(issuing_name::text)) ILIKE lower(trim('%#{params[:search]}%')) OR
+                       lower(trim(recipient_name::text)) ILIKE lower(trim('%#{params[:search]}%')) OR
+                       lower(trim(issuing_cnpj::text)) ILIKE lower(trim('%#{params[:search]}%')) OR
+                       lower(trim(recipient_cnpj::text)) ILIKE lower(trim('%#{params[:search]}%'))") if params[:search]
+    base = base.select("invoices.*").order("invoices.created_at DESC")
     @invoices = base
   end
 
@@ -53,34 +62,6 @@ class InvoicesController < ApplicationController
   def edit
   end
 
-  # POST /invoices or /invoices.json
-  def create
-    @invoice = Invoice.new(invoice_params)
-
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to invoice_url(@invoice), notice: "Invoice was successfully created." }
-        format.json { render :show, status: :created, location: @invoice }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /invoices/1 or /invoices/1.json
-  def update
-    respond_to do |format|
-      if @invoice.update(invoice_params)
-        format.html { redirect_to invoice_url(@invoice), notice: "Invoice was successfully updated." }
-        format.json { render :show, status: :ok, location: @invoice }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # DELETE /invoices/1 or /invoices/1.json
   def destroy
     @invoice.destroy
@@ -99,6 +80,9 @@ class InvoicesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def invoice_params
-      params.require(:invoice).permit(:serial_number, :invoice_number, :integer, :emission_date, :issuing_company_id, :recipient_company_id)
+      params.require(:invoice)
+            .permit(:serial_number, :invoice_number, :integer,
+                    :emission_date, :issuing_company_id,
+                    :recipient_company_id, :search)
     end
 end

@@ -7,7 +7,23 @@
   <% end %>
 
   <h1>Notas Fiscais</h1>
-  <%= link_to "Importar Nota Fiscal", new_invoice_path, class: "btn btn-primary mt-3" %>
+
+  <!-- Formulário de busca -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <%= form_with url: invoices_path, method: :get, local: true do |form| %>
+        <div class="input-group">
+          <%= form.text_field :search, class: "form-control", placeholder: "Buscar Notas Fiscais..." %>
+          <div class="input-group-append">
+            <%= form.submit "Buscar", class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-8 text-end">
+      <%= link_to "Importar Nota Fiscal", new_invoice_path, class: "btn btn-primary" %>
+    </div>
+  </div>
 
   <div class="table-responsive">
     <table class="table table-striped">

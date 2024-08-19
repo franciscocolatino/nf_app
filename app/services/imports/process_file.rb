@@ -15,11 +15,10 @@ class Imports::ProcessFile
     file = Nokogiri::XML(@job.file.download)
 
     invoice = process_data(file)
-
     if errors.full_messages.empty?
       @job.update_columns(status: Job::DONE, progress: 100, content: { invoice_id: invoice.id })
     else
-      update_error_job(errors.full_messages.join(', '))
+      update_error_job(errors.values)
     end
   end
 
@@ -29,10 +28,13 @@ class Imports::ProcessFile
     dest_infos = file.css('dest')
     nfe_infos = file.css('ide')
 
+    check_nfe_infos(emit_infos, dest_infos, nfe_infos)
+    return unless errors.full_messages.empty?
+
     ActiveRecord::Base.transaction do
       company_emit = create_company(emit_infos)
       company_dest = create_company(dest_infos)
-      
+
       invoice = create_invoice(nfe_infos, company_emit, company_dest)
 
       process_products(file, invoice)
@@ -41,6 +43,12 @@ class Imports::ProcessFile
     end
   rescue => e
     errors.add(:process_data, e.to_s)
+  end
+
+  def check_nfe_infos(emit_infos, dest_infos, nfe_infos)
+    errors.add(:check_nfe_infos, 'Emitente não encontrado') if emit_infos.blank?
+    errors.add(:check_nfe_infos, 'Destinatário não encontrado') if dest_infos.blank?
+    errors.add(:check_nfe_infos, 'Informações da Nota Fiscal não encontradas') if nfe_infos.blank?
   end
 
   def process_products(file, invoice)

@@ -23,7 +23,7 @@ export default class extends Controller {
       .then(data => {
         this.updateStatus(data.status);
         this.updateProgress(data.progress);
-        this.updateErrors(data.errors);
+        this.updateErrors(data.job_errors);
         this.checkStopCondition(data);
       });
   }
