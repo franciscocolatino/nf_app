@@ -1,24 +1,34 @@
-# README
+## Pré-requisitos
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Você precisa ter os as seguintes ferramentas instalados:
 
-Things you may want to cover:
+- **Docker**
 
-* Ruby version
+## Passos para Configurar e Rodar o Projeto
 
-* System dependencies
+### 1. Clone o Repositório
 
-* Configuration
+Primeiro, clone o repositório do projeto:
 
-* Database creation
+```bash
+git clone git@github.com:franciscocolatino/nf_app.git
+cd nf_app
+```
+Após isso, basta executar o docker:
 
-* Database initialization
+```bash
+sudo docker-compose up
+```
+Quando o docker terminar de instalar todas as dependencias, deve-se executar a criação do banco de dados
 
-* How to run the test suite
+```bash
+sudo docker-compose exec app rails db:create
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Realizamos o migrate e seed
 
-* Deployment instructions
+```bash
+sudo docker-compose exec app rails db:migrate db:seed
+```
 
-* ...
+Pronto, aplicação funcionando!
