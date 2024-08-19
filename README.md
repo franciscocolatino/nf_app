@@ -1,6 +1,6 @@
 ## Pré-requisitos
 
-Você precisa ter os as seguintes ferramentas instalados:
+Você precisa ter as seguintes ferramentas instalados:
 
 - **Docker**
 
@@ -14,21 +14,21 @@ Primeiro, clone o repositório do projeto:
 git clone git@github.com:franciscocolatino/nf_app.git
 cd nf_app
 ```
-Após isso, basta executar o docker:
+### 2. Após isso, basta executar o docker:
 
 ```bash
 sudo docker-compose up
 ```
-Quando o docker terminar de instalar todas as dependencias, deve-se executar a criação do banco de dados
+### 3.Quando o docker terminar de instalar todas as dependencias, deve-se executar a criação do banco de dados
 
 ```bash
 sudo docker-compose exec app rails db:create
 ```
 
-Realizamos o migrate e seed
+### 4. Realizamos o migrate e seed
 
 ```bash
 sudo docker-compose exec app rails db:migrate db:seed
 ```
 
-Pronto, aplicação funcionando!
+### Pronto, aplicação funcionando!
